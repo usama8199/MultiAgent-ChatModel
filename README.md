@@ -1,49 +1,50 @@
 # MultiAgent-ChatModel
-We have created a multi agent chat model which utilizes multiple agents to perform various task
 
 ## Introduction
-We have created multi agent chat model using which you can perform various task be it mailing to a person or browsing something from web. We have utilize [Langchain](https://python.langchain.com/docs/get_started/quickstart/) and [Langgraph](https://python.langchain.com/docs/langgraph/) which extends the LangChain Expression Language with the ability to coordinate multiple chains (or actors) across multiple steps of computation in a cyclic manner. It is inspired by [Pregel](https://research.google/pubs/pregel-a-system-for-large-scale-graph-processing/) and [Apache Beam](https://beam.apache.org/). The current interface exposed is one inspired by [NetworkX](https://networkx.org/documentation/latest/). It utilize [React](https://arxiv.org/pdf/2210.03629.pdf) method which will figure out the action and once completed reflect on that result if that solves the given task. This will repeat again and again until it solves the given problem. In our case it will utlize multiple agents to solves the given task. Examples will be given in the susequest section
+We have created a multi-agent chat model that allows you to perform various tasks, such as sending emails to people or browsing the web. We have utilized [Langchain](https://python.langchain.com/docs/get_started/quickstart/) and [Langgraph](https://python.langchain.com/docs/langgraph/), which extends the LangChain Expression Language with the ability to coordinate multiple chains (or actors) across multiple steps of computation in a cyclic manner. It is inspired by [Pregel](https://research.google/pubs/pregel-a-system-for-large-scale-graph-processing/) and [Apache Beam](https://beam.apache.org/).
+
+The current interface exposed is inspired by [NetworkX](https://networkx.org/documentation/latest/). It utilizes the [React](https://arxiv.org/pdf/2210.03629.pdf) method, which will figure out the action and, once completed, reflect on that result to determine if it solves the given task. This process will repeat until the given problem is solved. In our case, it will utilize multiple agents to solve the given task.
 
 
 ## Architecture 
-The below image shows the high level design of the architecture. Here there will be [supervisior](https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb) which will understand the task and utlize one or more agents depending on weather it answer or solves the desired task. Once the agent task is completed it will provide the result to the supervisor which will decide weather the task is completed or any other tools is required. So no matter what the chain will comes back to supervisior. Below you can see some examples and video explnation and demo
+The image below shows the high-level design of the architecture. A supervisor will understand the task and utilize one or more agents, depending on whether it can answer or solve the desired task. Once an agent completes its task, it will provide the result to the [supervisior](https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb), which will decide whether the task is completed or if another tool is required. Regardless of the situation, the chain will come back to the supervisor. Below, you can see some examples, video explanations, and a demo.
 
 ### High Level Design
 <img src="https://github.com/usama8199/MultiAgent-ChatModel/blob/main/Image/Overview.png" width="400" height="500"/>
 
 #### Examples
-1. If i wanted to know who won women ipl 2024 which is not possible using LLM as it will not have latest knowledge so it will utilize web browser tool to extract the information and provide a suitable answer
-2. If i wanted to extract the total and due date of a person from a document and mail it to them i can ustilize rag(Retrival Augmented Generation) agent and extract the user total and due date and then utilize gpt to costruct a mail with total and due date then utilize mail agent to mail to that person
+1. If you want to know who won the Women's IPL 2024, which is not possible using an LLM (Large Language Model) as it will not have the latest knowledge, the system will utilize a web browser tool to extract the information and provide a suitable answer.
+2. If you want to extract the total amount and due date for a person from a document and email it to them, you can utilize a RAG (Retrieval Augmented Generation) agent to extract the user's total and due date, then use GPT to construct an email with the total and due date, and finally, utilize a mail agent to send the email to that person.
 
 #### Video Explanation (Click On the Image)
 [<img src="https://img.youtube.com/vi/rvDZ_jIoIho/maxresdefault.jpg" width="70%">](https://youtu.be/rvDZ_jIoIho)
 
 
 ## CRAG (inside one of the agent)
-[CRAG](https://arxiv.org/pdf/2401.15884.pdf) is a method which utilizes re-ranking to evaluates the retrive documents or chunks and use the most relevent chunks on semantic and syntatic meaning. Below chain is created using langgraph
-
+[CRAG](https://arxiv.org/pdf/2401.15884.pdf) is a method that utilizes re-ranking to evaluate the retrieved documents or chunks and uses the most relevant chunks based on semantic and syntactic meaning
 
 <img src="https://github.com/usama8199/MultiAgent-ChatModel/blob/main/Image/CRAG.png" width="1400" height="250"/>
 
 **Steps**
-1. First the question transformation happens which is more rag friendly for eg changing RNN to Recurrent Neural Networks
-2. Then it will extract the document using question using some similarity search methods
-3. It will then utilize the question and retrive documents or chunks and use the most relevent chunks based on semantic and syntatic meaning using GPT models and appropriate prompt (in paper they have train a T5 model)
-4. If we don't find any relevent chunks, chain will go on web to search the relevent information, provide answer and send that to supervisior
-5. If even one relevent chunk was found it will use that to generate an answer and send that to supervisior which will decide the next steps
+1. First, question transformation occurs, which makes the question more RAG-friendly. For example, changing "RNN" to "Recurrent Neural Networks".
+2. Then, it will extract the relevant documents using the question and some similarity search methods.
+3. It will then utilize the question and retrieved documents or chunks, and use the most relevant chunks based on semantic and syntactic meaning using GPT models and an appropriate prompt (in the paper, they have trained a T5 model).
+4. If no relevant chunks are found, the chain will search the web for relevant information, provide an answer, and send it to the supervisor.
+5. If even one relevant chunk is found, it will use that to generate an answer and send it to the supervisor, which will decide the next steps.
 
 # Setup
 
 1. Git clone the repository
 2. Install the dependency using `pip install -r requirements.txt`
-3. Create a .env variable and add all the keys 
+3. Create a .env variable and add all the keys
+    1. TAVILY_API_KEY can be found [here](https://docs.tavily.com/docs/gpt-researcher/getting-started)
+    2. AZURE_OPENAI_API_KEY and AZURE_OPENAI_ENDPOINT will be given by organization or you can also use just open api key (you just need to change AzureChatOpenAI and AzureOpenAIEmbeddings to openai one which you can find online in langgraph_crag_Main.py)
+    3. LANGCHAIN_API_KEY for langsmith can be found [here](https://smith.langchain.com/)
+    4. SLACK_BOT_TOKEN can be found in [slack app](https://api.slack.com/tutorials/tracks/getting-a-token)
+4. You also need to have gmail Credentials.json which can be found [here](https://www.youtube.com/watch?v=_pZebYlgGcY)
+5. You can then finally run the `streamlit run streamlit_ui.py`
 
-
-
-
-
-
-
+Note: If you are not able to get gmail credentials you can still run it it's just you will not be able to call gmail agent
 
 
 # Applications
