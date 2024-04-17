@@ -6,14 +6,18 @@ We have created multi agent chat model using which you can perform various task 
 
 
 ## Architecture 
-The below image shows the high level design of the architecture. Here there will be [supervisior](https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb) which will understand the task and utlize one or more agents depending on weather it answer or solves the desired task. Once the agent task is completed it will provide the result to the supervisor which will decide weather the task is completed or any other tools is required. So no matter what the chain will comes back to supervisior. Below you can see some examples and video explnation
-
-##### Examples
-1. If i wanted to know who won women ipl 2024 which is not possible using LLM as it will not have latest knowledge so it will utilize web browser tool to extract the information and provide a suitable answer
-2. If i wanted to extract the total and due date of a person from a document and mail it to them i can ustilize rag(Retrival Augmented Generation) agent and extract the user total and due date and then utilize gpt to costruct a mail with total and due date then utilize mail agent to mail to that person
+The below image shows the high level design of the architecture. Here there will be [supervisior](https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb) which will understand the task and utlize one or more agents depending on weather it answer or solves the desired task. Once the agent task is completed it will provide the result to the supervisor which will decide weather the task is completed or any other tools is required. So no matter what the chain will comes back to supervisior. Below you can see some examples and video explnation and demo
 
 ### High Level Design
 <img src="https://github.com/usama8199/MultiAgent-ChatModel/blob/main/Image/Overview.png" width="400" height="500"/>
+
+#### Examples
+1. If i wanted to know who won women ipl 2024 which is not possible using LLM as it will not have latest knowledge so it will utilize web browser tool to extract the information and provide a suitable answer
+2. If i wanted to extract the total and due date of a person from a document and mail it to them i can ustilize rag(Retrival Augmented Generation) agent and extract the user total and due date and then utilize gpt to costruct a mail with total and due date then utilize mail agent to mail to that person
+
+#### Video Explanation (Click On the Image)
+[<img src="https://img.youtube.com/vi/rvDZ_jIoIho/maxresdefault.jpg" width="70%">](https://youtu.be/rvDZ_jIoIho)
+
 
 ## CRAG (inside one of the agent)
 [CRAG](https://arxiv.org/pdf/2401.15884.pdf) is a method which utilizes re-ranking to evaluates the retrive documents or chunks and use the most relevent chunks on semantic and syntatic meaning. Below chain is created using langgraph
