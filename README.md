@@ -31,3 +31,29 @@ The below image shows the high level design of the architecture. Here there will
 3. It will then utilize the question and retrive documents or chunks and use the most relevent chunks based on semantic and syntatic meaning using GPT models and appropriate prompt (in paper they have train a T5 model)
 4. If we don't find any relevent chunks, chain will go on web to search the relevent information, provide answer and send that to supervisior
 5. If even one relevent chunk was found it will use that to generate an answer and send that to supervisior which will decide the next steps
+
+# Setup
+
+1. Git clone the repository
+2. Install the dependency using `pip install -r requirements.txt`
+3. Create a .env variable and add all the keys 
+
+
+
+
+
+
+
+
+
+# Applications
+1. Information extraction from invoice data, send as a report on slack to relevant users or stakeholders, in one go.
+2. Retrieve relevant information from the confluence or a database without needing to store the information somewhere and get quick answers from the model.
+3. Perform multiple step processes for engineers from planning to utilizing various API to complete the task, reflect and improvise on it.
+
+# Reference
+. https://python.langchain.com/docs/langgraph \
+. https://smith.langchain.com/ \
+. https://arxiv.org/pdf/2401.15884.pdf \
+. https://python.langchain.com/docs/integrations/toolkits 
+
