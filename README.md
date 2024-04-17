@@ -17,7 +17,7 @@ The image below shows the high-level design of the architecture. A supervisor wi
 2. If you want to extract the total amount and due date for a person from a document and email it to them, you can utilize a RAG (Retrieval Augmented Generation) agent to extract the user's total and due date, then use GPT to construct an email with the total and due date, and finally, utilize a mail agent to send the email to that person.
 
 #### Video Explanation (Click On the Image)
-[<img src="https://img.youtube.com/vi/rvDZ_jIoIho/maxresdefault.jpg" width="70%">](https://youtu.be/rvDZ_jIoIho)
+[<img src="https://img.youtube.com/vi/tC5P0R3mBJs/maxresdefault.jpg" width="70%">](https://youtu.be/tC5P0R3mBJs)
 
 
 ## CRAG (inside one of the agent)
