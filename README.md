@@ -16,4 +16,7 @@ The below image shows the high level design of the architecture. Here there will
 <img src="https://github.com/usama8199/MultiAgent-ChatModel/blob/main/Image/Overview.png" width="500" height="600"/>
 
 ## CRAG (inside one of the agent)
+[CRAG](https://arxiv.org/pdf/2401.15884.pdf) is a method which utilizes re-ranking to evaluates the retrive documents or chunks and use the most relevent chunks on semantic and syntatic meaning
+
+###### Architecture
 
