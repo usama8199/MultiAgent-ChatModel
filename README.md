@@ -3,7 +3,7 @@
 ## Introduction
 We have created a multi-agent chat model that allows you to perform various tasks, such as sending emails to people or browsing the web. We have utilized [Langchain](https://python.langchain.com/docs/get_started/quickstart/) and [Langgraph](https://python.langchain.com/docs/langgraph/), which extends the LangChain Expression Language with the ability to coordinate multiple chains (or actors) across multiple steps of computation in a cyclic manner. It is inspired by [Pregel](https://research.google/pubs/pregel-a-system-for-large-scale-graph-processing/) and [Apache Beam](https://beam.apache.org/).
 
-The current interface exposed is inspired by [NetworkX](https://networkx.org/documentation/latest/). It utilizes the [React](https://arxiv.org/pdf/2210.03629.pdf) method, which will figure out the action and, once completed, reflect on that result to determine if it solves the given task. This process will repeat until the given problem is solved. In our case, it will utilize multiple agents to solve the given task.
+The current interface exposed is inspired by [NetworkX](https://networkx.org/documentation/latest/). It utilizes the [React](https://arxiv.org/pdf/2210.03629.pdf) method, which will figure out the action and, once completed, reflect on that result to determine if it solves the given task. This process will repeat until the given problem is solved. In our case, it will utilize multiple agents to solve the given task. We are using GPT models for now but we can also move to open source in the future modification
 
 
 ## Architecture 
