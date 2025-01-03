@@ -7,9 +7,9 @@ The current interface exposed is inspired by [NetworkX](https://networkx.org/doc
 
 
 ## Architecture 
-The image below shows the high-level design of the architecture. A supervisor will understand the task and utilize one or more agents, depending on whether it can answer or solve the desired task. Once an agent completes its task, it will provide the result to the [supervisior](https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb), which will decide whether the task is completed or if another tool is required. Regardless of the situation, the chain will come back to the supervisor. Below, you can see some examples, video explanations, and a demo.
+The image below shows the high-level design of the architecture. A supervisor will understand the task and utilize one or more agents, depending on whether they can answer or solve the desired task. Once an agent completes its task, it will provide the result to the [supervisior](https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb), which will decide whether the task is completed or if another tool is required. Regardless of the situation, the chain will come back to the supervisor. Below, you can see some examples, video explanations, and a demo.
 
-### High Level Design
+### High-Level Design
 <img src="https://github.com/usama8199/MultiAgent-ChatModel/blob/main/Image/Overview.png" width="400" height="500"/>
 
 #### Examples
@@ -20,7 +20,7 @@ The image below shows the high-level design of the architecture. A supervisor wi
 [<img src="https://img.youtube.com/vi/tC5P0R3mBJs/maxresdefault.jpg" width="70%">](https://youtu.be/tC5P0R3mBJs)
 
 
-## CRAG (inside one of the agent)
+## CRAG (inside one of the agents)
 [CRAG](https://arxiv.org/pdf/2401.15884.pdf) is a method that utilizes re-ranking to evaluate the retrieved documents or chunks and uses the most relevant chunks based on semantic and syntactic meaning
 
 <img src="https://github.com/usama8199/MultiAgent-ChatModel/blob/main/Image/CRAG.png" width="1400" height="250"/>
@@ -30,7 +30,7 @@ The image below shows the high-level design of the architecture. A supervisor wi
 2. Then, it will extract the relevant documents using the question and some similarity search methods.
 3. It will then utilize the question and retrieved documents or chunks, and use the most relevant chunks based on semantic and syntactic meaning using GPT models and an appropriate prompt (in the paper, they have trained a T5 model).
 4. If no relevant chunks are found, the chain will search the web for relevant information, provide an answer, and send it to the supervisor.
-5. If even one relevant chunk is found, it will use that to generate an answer and send it to the supervisor, which will decide the next steps.
+5. If even one relevant chunk is found, it will use that to generate an answer and send it to the supervisor, who will decide the next steps.
 
 # Setup
 
@@ -38,19 +38,19 @@ The image below shows the high-level design of the architecture. A supervisor wi
 2. Install the dependency using `pip install -r requirements.txt`
 3. Create a .env variable and add all the keys
     1. TAVILY_API_KEY can be found [here](https://docs.tavily.com/docs/gpt-researcher/getting-started)
-    2. AZURE_OPENAI_API_KEY and AZURE_OPENAI_ENDPOINT will be given by organization or you can also use just open api key (you just need to change AzureChatOpenAI and AzureOpenAIEmbeddings to openai one which you can find online in langgraph_crag_Main.py)
+    2. AZURE_OPENAI_API_KEY and AZURE_OPENAI_ENDPOINT will be given by the organization or you can also use just open API key (you just need to change AzureChatOpenAI and AzureOpenAIEmbeddings to openai one which you can find online in langgraph_crag_Main.py)
     3. LANGCHAIN_API_KEY for langsmith can be found [here](https://smith.langchain.com/)
     4. SLACK_BOT_TOKEN can be found in [slack app](https://api.slack.com/tutorials/tracks/getting-a-token)
 4. You also need to have gmail Credentials.json which can be found [here](https://www.youtube.com/watch?v=_pZebYlgGcY)
 5. You can then finally run the `streamlit run streamlit_ui.py`
 
-Note: If you are not able to get gmail credentials you can still run it it's just you will not be able to call gmail agent
+Note: If you are not able to get gmail credentials you can still run it it's just you will not be able to call the gmail agent
 
 
 # Applications
-1. Information extraction from invoice data, send as a report on slack to relevant users or stakeholders, in one go.
+1. Information extraction from invoice data, sent as a report on Slack to relevant users or stakeholders, in one go.
 2. Retrieve relevant information from the confluence or a database without needing to store the information somewhere and get quick answers from the model.
-3. Perform multiple step processes for engineers from planning to utilizing various API to complete the task, reflect and improvise on it.
+3. Perform multiple-step processes for engineers from planning to utilizing various APIs to complete the task, reflect and improvise on it.
 
 # Reference
 . https://python.langchain.com/docs/langgraph \
